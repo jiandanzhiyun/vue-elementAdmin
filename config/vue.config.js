@@ -9,7 +9,7 @@ module.exports = {
         https: false,
         proxy: {
             '/api':{
-                target:'https://sansheng.cdheshiyu.com',
+                target:process.env.VUE_APP_BASE_API,
                 changeOrigin:true,
                 secure: false,
                 pathRewrite:{

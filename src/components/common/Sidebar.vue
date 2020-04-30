@@ -6,11 +6,12 @@
             :collapse="collapse"
             background-color="#324157"
             text-color="#bfcbd9"
-            active-text-color="#20a0ff"
+            active-text-color="#fff"
             unique-opened
             router
         >
-            <template v-for="item in items">
+
+            <template v-for="item in list">
                 <template v-if="item.subs">
                     <el-submenu :index="item.index" :key="item.index">
                         <template slot="title">
@@ -23,18 +24,25 @@
                                 :index="subItem.index"
                                 :key="subItem.index"
                             >
-                                <template slot="title">{{ subItem.title }}</template>
+                                <template slot="title">
+                                    {{ subItem.title}}
+                                </template>
                                 <el-menu-item
                                     v-for="(threeItem,i) in subItem.subs"
                                     :key="i"
                                     :index="threeItem.index"
-                                >{{ threeItem.title }}</el-menu-item>
+                                >{{ threeItem.title}}</el-menu-item>
                             </el-submenu>
                             <el-menu-item
                                 v-else
                                 :index="subItem.index"
                                 :key="subItem.index"
-                            >{{ subItem.title }}</el-menu-item>
+                            >
+                                <template slot="title">
+                                    <i :class="subItem.icon"></i>
+                                    <span slot="title">{{ subItem.title }}</span>
+                                </template>
+                            </el-menu-item>
                         </template>
                     </el-submenu>
                 </template>
@@ -51,10 +59,12 @@
 
 <script>
 import bus from '../common/bus';
+import menu from '@/assets/menu.json'
 export default {
     data() {
         return {
             collapse: false,
+            list:menu.items,
             items: [
                 {
                     icon: 'el-icon-lx-home',
@@ -76,9 +86,12 @@ export default {
                         },
                     ]
                 },
+        ]
 
-            ]
         };
+    },
+    mounted(){
+        console.log(menu.items)
     },
     computed: {
         onRoutes() {

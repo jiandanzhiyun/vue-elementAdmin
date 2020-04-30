@@ -2,11 +2,10 @@ import axios from 'axios';
 
 const service = axios.create({
     // process.env.NODE_ENV === 'development', //来判断是否开发环境
-     headers:{'Content-Type':'application/json;charset=utf-8', "SS-Token": localStorage.getItem('token') },
-     baseURL: 'https://sansheng.cdheshiyu.com',
+     headers:{'Content-Type':'application/json;charset=utf-8',"X-Token":localStorage.getItem('token')},
+     baseURL: process.env.VUE_APP_BASE_API,
     timeout: 5000
 });
-
 service.interceptors.request.use(
     config => {
         return config;

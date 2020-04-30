@@ -3,8 +3,8 @@
         <div class="ms-login">
             <div class="ms-title">后台管理系统</div>
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
-                <el-form-item prop="name">
-                    <el-input v-model="param.name" placeholder="username">
+                <el-form-item prop="username">
+                    <el-input v-model="param.username" placeholder="username">
                         <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
                     </el-input>
                 </el-form-item>
@@ -28,51 +28,48 @@
 
 <script>
     import axios from 'axios'
-    import md5 from 'js-md5'
-export default {
-    data: function() {
-        return {
-            param: {
-                name: '',
-                password: '',
-            },
-            rules: {
-                name: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-                password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-            },
-            baseURL: 'https://sansheng.cdheshiyu.com',
-        };
-    },
-    methods: {
-        submitForm() {
-            this.$refs.login.validate(valid => {
-                if (valid) {
-                        let param={
-                            name:this.param.name,
-                            password:md5(this.param.password)
-
-                        }
-                    axios.post(this.baseURL+'/merchant/login',param).then(res=>{
-                            if(res.data.code==1){
+    export default {
+        data: function() {
+            return {
+                param: {
+                    username: process.env.VUE_APP_USERNAME,
+                    password: process.env.VUE_APP_PASSWORD
+                },
+                rules: {
+                    username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+                    password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+                },
+                baseURL:process.env.VUE_APP_BASE_API,
+            };
+        },
+        methods: {
+            submitForm() {
+                this.$refs.login.validate(valid => {
+                    if (valid) {
+                        axios.post(this.baseURL+'/user/login',this.param).then(res=>{
+                            if(res.data.code==0){
                                 this.$message.success('登录成功');
-                                localStorage.setItem('username',this.param.name)
-                                localStorage.setItem('token',res.data.data.token)
+                                this.$store.commit("$_setStorage", res.data.token);
+
+                                this.$store.commit("$_setAccount", res.data.username);
                                 this.$router.push('/');
+
                             }else{
                                 this.$message.error(res.data.msg);
                             }
 
-                    }).catch(() => {});
+                        }).catch(() => {
+                        });
 
-                } else {
-                    this.$message.error('请输入账号和密码');
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
+                    } else {
+                        this.$message.error('请输入账号和密码');
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
         },
-    },
-};
+    };
 </script>
 
 <style scoped>
@@ -81,15 +78,17 @@ export default {
     width: 100%;
     height: 100%;
     background-image: url(../../assets/img/login-bg.jpg);
-    background-size: 100%;
+    background-size: cover;
 }
 .ms-title {
     width: 100%;
     line-height: 50px;
     text-align: center;
     font-size: 20px;
-    color: #fff;
+    color: #409EFF;font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
     border-bottom: 1px solid #ddd;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 70px #fff;
 }
 .ms-login {
     position: absolute;

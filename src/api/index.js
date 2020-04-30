@@ -1,33 +1,32 @@
 import request from '../utils/request';
 
-//服务列表
-const fetchData =(query)=>{
+//用户信息
+const Info =(query)=>{
     return request({
-        url: '/merchant/Service',
+        url: '/user/info',
         method: 'get',
         params: query
     });
 }
-
-//服务列表缩略图片上传
-const abridge=(query)=>{
+//bug所有状态
+const bugState=(query)=>{
     return request({
-        url: '/api/active/dashboard/upload',
-        method: 'post',
+        url:'/status/list',
+        method:'post',
         query
     });
 }
-//服务列表新增
-const addServe=(query)=>{
+//bug状态修改
+const bugModify=(query)=>{
     return request({
-        url: '/merchant/Service/add',
-        method: 'post',
+        url:'/status/update',
+        method:'post',
         query
     });
 }
 const ajax={
-    fetchData:fetchData,
-    abridge:abridge,
-    addServe:addServe
+    Info:Info,
+    bugState:bugState,
+    bugModify:bugModify
 }
 export default ajax;

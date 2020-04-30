@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "icon": "el-icon-lx-home",
+      "index": "dashboard",
+      "title": "系统首页"
+    },
+    {
+      "icon": "el-icon-setting",
+      "index": "setting",
+      "title": "系统设置",
+      "subs": [
+        {
+          "icon": "el-icon-message",
+          "index": "email",
+          "title": "email"
+        },
+        {
+          "icon": "el-icon-cpu",
+          "index": "bug",
+          "title": "bug状态"
+        },
+        {
+          "icon": "el-icon-cpu",
+          "index": "bug-manage",
+          "title": "bug管理"
+        }
+      ]
+    }
+  ]
+}
