@@ -65,9 +65,10 @@
                 isShow:false,
                 form:{
                     name:'',
-                    id:''
+                    id:-1
                 },
-                title:'添加bug状态'
+                title:'添加bug状态',
+                number:0
             }
         },
         components:{
@@ -93,11 +94,13 @@
             modify(item){
                 this.isShow=true;
                 this.title="编辑bug状态"
+                this.number=1;
                 this.form=item
                 this.$refs.editProject.init(this.isShow)
             },
             addBug(){
                 this.isShow=true;
+                this.number=0;
                 this.title="添加bug状态"
                 this.$refs.editProject.init(this.isShow)
             },
@@ -106,10 +109,18 @@
                console.log(item)
             },
             onSubmit(){
-                debugger
-            ajax.bugModify(this.form).then(res=>{
-                console.log(res)
-            })
+                console.log(this.form)
+                if(this.number==0){
+                    ajax.bugAdd(this.form).then(res=>{
+                        console.log(res)
+                    })
+                }else{
+                    ajax.bugModify(this.form).then(res=>{
+                        console.log(res)
+                    })
+                }
+
+
             },
             cancel(){
                 this.isShow=false;

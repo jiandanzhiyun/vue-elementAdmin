@@ -24,9 +24,17 @@ const bugModify=(query)=>{
         query
     });
 }
+const bugAdd=(query)=>{
+    return request({
+        url:'/status/add',
+        method:'post',
+        query
+    });
+}
 const ajax={
     Info:Info,
     bugState:bugState,
-    bugModify:bugModify
+    bugModify:bugModify,
+    bugAdd:bugAdd
 }
 export default ajax;
