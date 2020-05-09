@@ -24,6 +24,16 @@
           "icon": "el-icon-cpu",
           "index": "bug-manage",
           "title": "bug管理"
+        },
+        {
+          "icon": "el-icon-notebook-1",
+          "index": "log",
+          "title": "操作日志"
+        },
+        {
+          "icon": "el-icon-notebook-1",
+          "index": "bug-group",
+          "title": "bug状态组"
         }
       ]
     }

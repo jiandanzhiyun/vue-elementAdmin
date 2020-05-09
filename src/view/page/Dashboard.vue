@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import echarts from '../echarts/index'
+    import echarts from '@/components/echarts/index'
 export default {
     name: 'dashboard',
     data() {

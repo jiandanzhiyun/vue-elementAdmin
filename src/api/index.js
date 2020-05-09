@@ -13,7 +13,7 @@ const bugState=(query)=>{
     return request({
         url:'/status/list',
         method:'post',
-        query
+        data:query
     });
 }
 //bug状态修改
@@ -21,20 +21,56 @@ const bugModify=(query)=>{
     return request({
         url:'/status/update',
         method:'post',
-        query
+        data:query
     });
 }
 const bugAdd=(query)=>{
     return request({
         url:'/status/add',
         method:'post',
-        query
+        data:query
+    });
+}
+//status/remove
+const bugRemove =(query)=>{
+    return request({
+        url: '/status/remove',
+        method: 'get',
+        params: query
+    });
+}
+///log/list
+const bugLog =(query)=>{
+    return request({
+        url: '/search/log',
+        method: 'post',
+        data: query
+    });
+}
+///log/classify
+const bugClassify =(query)=>{
+    return request({
+        url: '/log/classify',
+        method: 'post',
+        data: query
+    });
+}
+
+const bugGroup =(query)=>{
+    return request({
+        url: '/statusgroup/list',
+        method: 'post',
+        data: query
     });
 }
 const ajax={
     Info:Info,
     bugState:bugState,
     bugModify:bugModify,
-    bugAdd:bugAdd
+    bugAdd:bugAdd,
+    bugRemove:bugRemove,
+    bugLog:bugLog,
+    bugClassify:bugClassify,
+    bugGroup:bugGroup
 }
 export default ajax;

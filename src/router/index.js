@@ -1,21 +1,23 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-const login=()=>import('../components/page/Login.vue')
+const login=()=>import('../view/page/Login.vue')
 const Home = () => import('../components/common/Home.vue')
-const dashboard = () => import('../components/page/Dashboard.vue')
-const email = () => import('../components/page/email.vue')
-const bug = () => import('../components/page/bug.vue')
-const bugManage = () => import('../components/page/bug-manage.vue')
-const Tabs = () => import('../components/page/Tabs.vue')
-const BaseForm = () => import('../components/page/BaseForm.vue')
-const VueEditor = () => import('../components/page/VueEditor.vue')
-const Markdown = () => import('../components/page/Markdown.vue')
-const Upload = () => import('../components/page/Upload.vue')
-const BaseProject = () => import('../components/page/BaseProject.vue')
-const DragList = () => import('../components/page/DragList.vue')
-const DragDialog = () => import('../components/page/DragDialog.vue')
-const I18n = () => import('../components/page/I18n.vue')
-const Permission = () => import('../components/page/Permission.vue')
+const dashboard = () => import('../view/page/Dashboard.vue')
+const email = () => import('../view/page/system/email.vue')
+const bug = () => import('../view/page/system/bug.vue')
+const bugManage = () => import('../view/page/system/bug-manage.vue')
+const bugLog = () => import('../view/page/system/log.vue')
+const bugGroup = () => import('../view/page/system/bug-group.vue')
+const Tabs = () => import('../view/page/Tabs.vue')
+const BaseForm = () => import('../view/page/BaseForm.vue')
+const VueEditor = () => import('../view/page/VueEditor.vue')
+const Markdown = () => import('../view/page/Markdown.vue')
+const Upload = () => import('../view/page/Upload.vue')
+const BaseProject = () => import('../view/page/BaseProject.vue')
+const DragList = () => import('../view/page/DragList.vue')
+const DragDialog = () => import('../view/page/DragDialog.vue')
+const I18n = () => import('../view/page/I18n.vue')
+const Permission = () => import('../view/page/Permission.vue')
 
 Vue.use(Router);
 
@@ -49,15 +51,23 @@ export default new Router({
                     path: '/bug-manage',
                     component:bugManage,
                     meta: { title: 'bug管理' }
+                },{
+                    path: '/log',
+                    component:bugLog,
+                    meta: { title: '操作日志' }
+                },{
+                    path: '/bug-group',
+                    component:bugGroup,
+                    meta: { title: 'bug状态租' }
                 },
                 {
                     path: '/404',
-                    component: () => import('../components/page/404.vue'),
+                    component: () => import('../view/page/404.vue'),
                     meta: { title: '404' }
                 },
                 {
                     path: '/403',
-                    component: () => import( '../components/page/403.vue'),
+                    component: () => import( '../view/page/403.vue'),
                     meta: { title: '403' }
                 }
             ]

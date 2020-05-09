@@ -2,11 +2,12 @@
         <div class="bug-box">
             <h4 class="bug-title">bug的所有状态</h4>
             <div class="bug-btn">
-                <el-button type="primary" plain class="el-icon-plus" @click="addBug">添加bug状态</el-button>
+                <el-button type="primary"  class="el-icon-plus" @click="addBug">添加bug状态</el-button>
+                <el-button type="primary" plain class="el-icon-refresh-right" @click="getData">刷新</el-button>
             </div>
             <el-table
                     :data="tableData"
-                    style="width: 100%">
+                    style="width: 100%" max-height="600">
                 <el-table-column
                         fixed
                         prop="id"
@@ -22,13 +23,13 @@
                     <template slot-scope="scope">
                         <el-button
                                 @click.native.prevent="modify(scope.row)"
-                                type="danger"
+                                type="primary"
                                 size="small">
                             修改
                         </el-button>
                         <el-button
                                 @click.native.prevent="deleteRow(scope.$index, scope.row)"
-                                type="primary"
+                                type="danger"
                                 size="small">
                             删除
                         </el-button>
@@ -68,7 +69,8 @@
                     id:-1
                 },
                 title:'添加bug状态',
-                number:0
+                number:0,
+                loading:true
             }
         },
         components:{
@@ -79,10 +81,19 @@
         },
         methods:{
             getData(){
-              ajax.bugState().then(res=>{
+                this.tableData=[]
+                const loading = this.$loading({
+                    lock: true,
+                    text: '拼命加载中',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                });
+                 ajax.bugState().then(res=>{
                   console.log(res)
                   if(res.code==0){
                       this.tableData=res.statuslist
+                      setTimeout(() => {
+                          loading.close();
+                      }, 1000);
                   }else{
                       this.$message.error(res.msg || '加载错误');
                   }
@@ -106,17 +117,51 @@
             },
             //删除
             deleteRow(index,item){
-               console.log(item)
+                this.$confirm('此操作将关闭bug, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    ajax.bugRemove({id:item.id}).then(res=>{
+                        if(res.code==0){
+                            this.$message({
+                                message: res.msg || '删除成功',
+                                type: 'success'
+                            });
+                            this.tableData.splice(index, 1)
+                            this.getData()
+                        }
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
             },
             onSubmit(){
-                console.log(this.form)
                 if(this.number==0){
                     ajax.bugAdd(this.form).then(res=>{
-                        console.log(res)
+                        if(res.code==0){
+                            this.$message({
+                                message: res.msg || '添加成功',
+                                type: 'success'
+                            });
+                            this.getData()
+                            this.cancel()
+                        }
+
                     })
                 }else{
                     ajax.bugModify(this.form).then(res=>{
-                        console.log(res)
+                        if(res.code==0){
+                            this.$message({
+                                message: res.msg || '修改成功',
+                                type: 'success'
+                            });
+                            this.getData()
+                            this.cancel()
+                        }
                     })
                 }
 
