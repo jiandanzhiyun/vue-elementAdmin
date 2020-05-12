@@ -19,6 +19,7 @@ service.interceptors.response.use(
         if (response.status === 200) {
             if (response.data.code==10 || response.data.code==20){
                     alert('登录失效,即将返回重新登录')
+                localStorage.clear()
                 setTimeout(()=>{
                     window.location.href="http://localhost:5200/#/login"
 

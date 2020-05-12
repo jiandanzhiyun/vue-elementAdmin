@@ -1,8 +1,8 @@
 <template>
     <div class="bug-box">
-        <h4 class="bug-title">增加选择可以改变bug状态的组</h4>
+        <h4 class="bug-title">选择可以操作的页面组， 操作的角色由开发者决定</h4>
         <div class="bug-btn">
-            <el-button type="primary"  class="el-icon-plus" @click="addBug">添加状态组名</el-button>
+            <el-button type="primary"  class="el-icon-plus" @click="addBug">添加角色组</el-button>
             <el-button type="primary" plain class="el-icon-refresh-right" @click="getData">刷新</el-button>
         </div>
         <el-table
@@ -15,14 +15,14 @@
             </el-table-column>
             <el-table-column
                     prop="name"
-                    label="项目名">
+                    label="角色组">
             </el-table-column>
             <el-table-column
                     prop="bugstatuslist"
-                    label="状态权限">
+                    label="角色组">
                 <template slot-scope="scope">
 
-                    <el-tag v-for="item in scope.row.bugstatuslist" type="success" class="mr10 mb10">
+                    <el-tag v-for="item in scope.row.rolelist" type="success" class="mr10 mb10">
                         {{item}}
                     </el-tag>
                 </template>
@@ -52,7 +52,7 @@
         <editProject ref="editProject" v-show="isShow" :title="title">
             <div slot>
                 <el-form ref="form" :model="form" label-width="80px">
-                    <el-form-item label="项目名">
+                    <el-form-item label="角色组">
                         <el-input v-model="form.name"></el-input>
                     </el-form-item>
                     <el-form-item label="状态权限">
@@ -106,10 +106,10 @@
                     text: '拼命加载中',
                     background: 'rgba(0, 0, 0, 0.7)'
                 });
-                ajax.bugGroup().then(res=>{
+                ajax.roleList().then(res=>{
                     console.log(res)
                     if(res.code==0){
-                        this.tableData=res.departmentlist
+                        this.tableData=res.datalist
                         setTimeout(() => {
                             loading.close();
                         }, 1000);
@@ -117,9 +117,9 @@
                         this.$message.error(res.msg || '加载错误');
                     }
                 }).then(()=>{
-                    ajax.bugStatus().then(res=>{
+                    ajax.roleGet().then(res=>{
                         if(res.code==0){
-                            this.cities=res.statuslist
+                            this.cities=res.rolelist
                         }
                     })
                 })
@@ -132,7 +132,7 @@
                 this.title="编辑bug状态组"
                 this.number=1;
                 this.form=item
-                this.checklist=item.bugstatuslist
+                this.checklist=item.rolelist
                 this.$refs.editProject.init(this.isShow)
 
             },
@@ -151,7 +151,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    ajax.bugGroupremove({id:item.id}).then(res=>{
+                    ajax.roleRemove({id:item.id}).then(res=>{
                         if(res.code==0){
                             this.$message({
                                 message: res.msg || '删除成功',
@@ -170,11 +170,11 @@
             },
             handleChecked(item){
                 console.log(item)
-                this.form.checklist=item
+                this.form.rolelist=item
             },
             onSubmit(){
                 if(this.number==0){
-                    ajax.bugGroupadd(this.form).then(res=>{
+                    ajax.roleAdd(this.form).then(res=>{
                         if(res.code==0){
                             this.$message({
                                 message: res.msg || '添加成功',
@@ -186,9 +186,9 @@
 
                     })
                 }else{
-                    delete this.form['bugstatuslist']
-                    this.form.checklist=this.checklist
-                    ajax.bugEdit(this.form).then(res=>{
+                    delete this.form['checklist','code']
+                    this.form.rolelist=this.checklist
+                    ajax.roleEdit(this.form).then(res=>{
                         if(res.code==0){
                             this.$message({
                                 message: res.msg || '修改成功',

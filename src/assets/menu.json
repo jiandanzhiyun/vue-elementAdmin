@@ -34,6 +34,11 @@
           "icon": "el-icon-notebook-1",
           "index": "bug-group",
           "title": "bug状态组"
+        },
+        {
+          "icon": "el-icon-user",
+          "index": "role-group",
+          "title": "角色组"
         }
       ]
     }

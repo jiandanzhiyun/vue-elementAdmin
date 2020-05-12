@@ -99,12 +99,20 @@ import {formatDate} from '@/utils/date';
         },
         methods:{
             getData(){
+                const loading = this.$loading({
+                    lock: true,
+                    text: '拼命加载中',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                });
                 this.form.classify=this.value ? this.value:''
                 this.tableData=[]
                 ajax.bugLog(this.form).then(res=>{
                     if(res.code==0){
                         this.tableData=res.loglist
                         this.total=res.count
+                        setTimeout(() => {
+                            loading.close();
+                        }, 1000);
                     }else{
                         this.$message.error(res.msg || '加载错误');
                     }
