@@ -176,13 +176,7 @@
 </script>
 
 <style scoped>
-    .bug-box{
-        padding: 10px 0 0 30px;
-    }
-.bug-title{
-    color: #333;
-    padding: 0 0 20px 0;
-}
+
     .bug-btn{
         padding: 10px;
         background: #fff;

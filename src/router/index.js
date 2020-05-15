@@ -9,6 +9,10 @@ const bugManage = () => import('../view/page/system/bug-manage.vue')
 const bugLog = () => import('../view/page/system/log.vue')
 const bugGroup = () => import('../view/page/system/bug-group.vue')
 const roleGroup = () => import('../view/page/system/role-group.vue')
+const defaultValue = () => import('../view/page/system/default-value.vue')
+const bugImportant = () => import('../view/page/system/bug-important.vue')
+const bugLevel = () => import('../view/page/system/bug-level.vue')
+const position = () => import('../view/page/system/position.vue')
 const Tabs = () => import('../view/page/Tabs.vue')
 const BaseForm = () => import('../view/page/BaseForm.vue')
 const VueEditor = () => import('../view/page/VueEditor.vue')
@@ -64,7 +68,24 @@ export default new Router({
                     path: '/role-group',
                     component:roleGroup,
                     meta: { title: '角色组' }
+                },{
+                    path: '/default-value',
+                    component:defaultValue,
+                    meta: { title: '默认值' }
+                },{
+                    path: '/bug-important',
+                    component:bugImportant,
+                    meta: { title: '重要性' }
+                },{
+                    path: '/bug-level',
+                    component:bugLevel,
+                    meta: { title: '优先级' }
+                },{
+                    path: '/position',
+                    component:position,
+                    meta: { title: '职位' }
                 },
+                //
                 {
                     path: '/404',
                     component: () => import('../view/page/404.vue'),

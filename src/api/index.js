@@ -134,6 +134,156 @@ const roleRemove=(query)=>{
         params: query
     });
 }
+//default/status
+const defaultStatus=(query)=>{
+    return request({
+        url: '/default/status',
+        method: 'post',
+        data: query
+    });
+}
+//get/importants
+const getImport=(query)=>{
+    return request({
+        url: '/get/importants',
+        method: 'post',
+        data: query
+    });
+}
+//default/important
+const defaultImport=(query)=>{
+    return request({
+        url: '/default/important',
+        method: 'post',
+        data: query
+    });
+}
+//get/levels
+const getLevels=(query)=>{
+    return request({
+        url: '/get/levels',
+        method: 'post',
+        data: query
+    });
+}
+const defaultLevels=(query)=>{
+    return request({
+        url: '/default/level',
+        method: 'post',
+        data: query
+    });
+}
+//default/save
+const defaultSave=(query)=>{
+    return request({
+        url: '/default/save',
+        method: 'post',
+        data: query
+    });
+}
+//important/get
+const ImportantGet=(query)=>{
+    return request({
+        url: '/important/get',
+        method: 'post',
+        data: query
+    });
+}
+//important/add
+const ImportantAdd=(query)=>{
+    return request({
+        url: '/important/add',
+        method: 'post',
+        data: query
+    });
+}
+//important/update
+const ImportantUpdate=(query)=>{
+    return request({
+        url: '/important/update',
+        method: 'post',
+        data: query
+    });
+}
+///important/del
+const ImportantDel=(query)=>{
+    return request({
+        url: '/important/del',
+        method: 'get',
+        params: query
+    });
+}
+//level/get
+const levelGet=(query)=>{
+    return request({
+        url: '/level/get',
+        method: 'post',
+        data: query
+    });
+}
+//level/update
+const levelUpdate=(query)=>{
+    return request({
+        url: '/level/update',
+        method: 'post',
+        data: query
+    });
+}
+const levelAdd=(query)=>{
+    return request({
+        url: '/level/add',
+        method: 'post',
+        data: query
+    });
+}
+///level/del
+const levelDel=(query)=>{
+    return request({
+        url: '/level/del',
+        method: 'get',
+        params: query
+    });
+}
+//position/list
+const positionList=(query)=>{
+    return request({
+        url: '/position/list',
+        method: 'post',
+        data: query
+    });
+}
+//position/add
+const positionAdd=(query)=>{
+    return request({
+        url: '/position/add',
+        method: 'post',
+        data: query
+    });
+}
+///position/update
+const positionUpdate=(query)=>{
+    return request({
+        url: '/position/update',
+        method: 'post',
+        data: query
+    });
+}
+//get/hypos
+const getHypos=(query)=>{
+    return request({
+        url: '/get/hypos',
+        method: 'post',
+        data: query
+    });
+}
+//position/del
+const positionDel=(query)=>{
+    return request({
+        url: '/position/del',
+        method: 'get',
+        params: query
+    });
+}
 const ajax={
     Info:Info,
     bugState:bugState,
@@ -151,6 +301,25 @@ const ajax={
     roleGet:roleGet,
     roleAdd:roleAdd,
     roleEdit:roleEdit,
-    roleRemove:roleRemove
+    roleRemove:roleRemove,
+    defaultStatus:defaultStatus,
+    getImport:getImport,
+    defaultImport:defaultImport,
+    getLevels:getLevels,
+    defaultLevels:defaultLevels,
+    defaultSave:defaultSave,
+    ImportantGet:ImportantGet,
+    ImportantAdd:ImportantAdd,
+    ImportantUpdate:ImportantUpdate,
+    ImportantDel:ImportantDel,
+    levelGet:levelGet,
+    levelUpdate:levelUpdate,
+    levelAdd:levelAdd,
+    levelDel:levelDel,
+    positionList:positionList,
+    positionAdd:positionAdd,
+    positionUpdate:positionUpdate,
+    getHypos:getHypos,
+    positionDel:positionDel
 }
 export default ajax;

@@ -39,6 +39,26 @@
           "icon": "el-icon-user",
           "index": "role-group",
           "title": "角色组"
+        },
+        {
+          "icon": "el-icon-wallet",
+          "index": "default-value",
+          "title": "默认值"
+        },
+        {
+          "icon": "el-icon-wallet",
+          "index": "bug-important",
+          "title": "重要性"
+        },
+        {
+          "icon": "el-icon-wallet",
+          "index": "bug-level",
+          "title": "优先级"
+        },
+        {
+          "icon": "el-icon-wallet",
+          "index": "position",
+          "title": "职位"
         }
       ]
     }
