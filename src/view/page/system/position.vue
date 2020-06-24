@@ -97,7 +97,9 @@
                 form:{
                     name:'',
                     level:1,
-                    hypo:''
+                    hypo:'',
+                    id:''
+
                 },
                 number:0,
                 title:'',
@@ -144,6 +146,7 @@
                 this.$refs.editProject.init(this.isShow)
             },
             addPosition(){
+                debugger
                 this.title="新增职位"
                 this.number=0
                 this.isShow=true;
@@ -180,12 +183,14 @@
             onSubmit(){
                 this.form.level=JSON.parse(this.form.level)
                 if(this.number==0){
+                    this.form.id=-1
                     ajax.positionAdd(this.form).then(res=>{
                         if(res.code==0){
                             this.$message({
                                 message: res.msg || '添加成功',
                                 type: 'success'
                             });
+                            this.getData()
                         }
                     })
                 }else{
@@ -195,10 +200,11 @@
                                 message: res.msg || '修改成功',
                                 type: 'success'
                             });
+                            this.getData()
                         }
                     })
                 }
-                this.getData()
+
                 this.cancel()
             },
             cancel(){

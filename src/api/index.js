@@ -284,6 +284,37 @@ const positionDel=(query)=>{
         params: query
     });
 }
+const userGroup=(query)=>{
+    return request({
+        url: '/group/get',
+        method: 'post',
+        data: query
+    });
+}
+///group/update
+const userUpdate=(query)=>{
+    return request({
+        url: '/group/update',
+        method: 'post',
+        data: query
+    });
+}
+///group/add
+const userAdd=(query)=>{
+    return request({
+        url: '/group/add',
+        method: 'post',
+        data: query
+    });
+}
+//get/user
+const getName=(query)=>{
+    return request({
+        url: '/get/user',
+        method: 'post',
+        data: query
+    });
+}
 const ajax={
     Info:Info,
     bugState:bugState,
@@ -320,6 +351,10 @@ const ajax={
     positionAdd:positionAdd,
     positionUpdate:positionUpdate,
     getHypos:getHypos,
-    positionDel:positionDel
+    positionDel:positionDel,
+    userGroup:userGroup,
+    userUpdate:userUpdate,
+    userAdd:userAdd,
+    getName:getName
 }
 export default ajax;

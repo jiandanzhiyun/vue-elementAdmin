@@ -59,6 +59,11 @@
           "icon": "el-icon-wallet",
           "index": "position",
           "title": "职位"
+        },
+        {
+          "icon": "el-icon-wallet",
+          "index": "usergroup",
+          "title": "用户组"
         }
       ]
     }

@@ -1,8 +1,8 @@
 <template>
     <div class="bug-box">
-        <h4 class="bug-title">选择可以操作的页面组， 操作的角色由开发者决定</h4>
+        <h4 class="bug-title">共享文件和文档权限控制组</h4>
         <div class="bug-btn">
-            <el-button type="primary"  class="el-icon-plus" @click="addBug">添加角色组</el-button>
+            <el-button type="primary"  class="el-icon-plus" @click="addBug">添加组</el-button>
             <el-button type="primary" plain class="el-icon-refresh-right" @click="getData">刷新</el-button>
         </div>
         <el-table
@@ -15,14 +15,14 @@
             </el-table-column>
             <el-table-column
                     prop="name"
-                    label="角色组">
+                    label="组名">
             </el-table-column>
             <el-table-column
                     prop="bugstatuslist"
-                    label="角色组">
+                    label="成员">
                 <template slot-scope="scope">
 
-                    <el-tag v-for="item in scope.row.rolelist" type="success" class="mr10 mb10">
+                    <el-tag v-for="item in scope.row.users" type="success" class="mr10 mb10">
                         {{item}}
                     </el-tag>
                 </template>
@@ -35,7 +35,7 @@
                             @click.native.prevent="modify(scope.row)"
                             type="primary"
                             size="small">
-                        编辑
+                        修改
                     </el-button>
                     <el-button
                             @click.native.prevent="deleteRow(scope.$index, scope.row)"
@@ -75,7 +75,7 @@
     import ajax from '@/api/index'
     import editProject from "@/components/edit/editProject"
     export default {
-        name: 'bug-group',
+        name: 'usergroup',
         data(){
             return{
                 tableData: [],
@@ -84,7 +84,7 @@
                     name:'',
                     id:-1,
                 },
-                title:'添加bug状态',
+                title:'平台管理',
                 number:0,
                 loading:true,
                 cities:[],
@@ -106,29 +106,29 @@
                     text: '拼命加载中',
                     background: 'rgba(0, 0, 0, 0.7)'
                 });
-                ajax.roleList().then(res=>{
+                ajax.userGroup().then(res=>{
                     console.log(res)
                     if(res.code==0){
-                        this.tableData=res.datalist
+                        this.tableData=res.grouplist
                         setTimeout(() => {
                             loading.close();
                         }, 1000);
                     }else{
                         this.$message.error(res.msg || '加载错误');
                     }
-                })
-                 ajax.getUser().then(res=>{
+                }).then(()=>{
+                    ajax.roleGet().then(res=>{
                         if(res.code==0){
-                            this.cities=res.users
+                            this.cities=res.rolelist
                         }
-                 })
-              
+                    })
+                })
+
             },
             //修改
             modify(item){
                 console.log(item)
                 this.isShow=true;
-                this.title="编辑bug状态组"
                 this.number=1;
                 this.form=item
                 this.checklist=item.rolelist
@@ -138,7 +138,6 @@
             addBug(){
                 this.isShow=true;
                 this.number=0;
-                this.title="添加bug状态组"
                 this.form={}
                 this.checklist=[]
                 this.$refs.editProject.init(this.isShow)
@@ -173,7 +172,7 @@
             },
             onSubmit(){
                 if(this.number==0){
-                    ajax.roleAdd(this.form).then(res=>{
+                    ajax.userAdd(this.form).then(res=>{
                         if(res.code==0){
                             this.$message({
                                 message: res.msg || '添加成功',
@@ -185,9 +184,7 @@
 
                     })
                 }else{
-                    delete this.form['checklist','code']
-                    this.form.rolelist=this.checklist
-                    ajax.roleEdit(this.form).then(res=>{
+                    ajax.userUpdate(this.form).then(res=>{
                         if(res.code==0){
                             this.$message({
                                 message: res.msg || '修改成功',
