@@ -14,6 +14,7 @@ const bugImportant = () => import('../view/page/system/bug-important.vue')
 const bugLevel = () => import('../view/page/system/bug-level.vue')
 const position = () => import('../view/page/system/position.vue')
 const usergroup = () => import('../view/page/system/usergroup.vue')
+const adduser = () => import('../view/page/user/add.vue')
 const Tabs = () => import('../view/page/Tabs.vue')
 const BaseForm = () => import('../view/page/BaseForm.vue')
 const VueEditor = () => import('../view/page/VueEditor.vue')
@@ -89,6 +90,10 @@ export default new Router({
                     path: '/usergroup',
                     component:usergroup,
                     meta: { title: '用户组' }
+                },{
+                    path: '/add',
+                    component:adduser,
+                    meta: { title: '添加用户' }
                 },
                 //
                 {

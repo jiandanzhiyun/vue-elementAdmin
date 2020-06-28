@@ -65,29 +65,6 @@ export default {
         return {
             collapse: false,
             list:menu.items,
-            items: [
-                {
-                    icon: 'el-icon-lx-home',
-                    index: 'dashboard',
-                    title: '系统首页'
-                },
-                {
-                    icon: 'el-icon-lx-cascades',
-                    index: 'table',
-                    title: '商家服务',
-                    subs: [
-                        {
-                            index: 'serve',
-                            title: '商家列表'
-                        },
-                        {
-                            index: 'editor',
-                            title: '预约管理',
-                        },
-                    ]
-                },
-        ]
-
         };
     },
     mounted(){

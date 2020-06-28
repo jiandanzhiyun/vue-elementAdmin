@@ -59,7 +59,6 @@
                         <el-checkbox-group v-model="checklist" @change="handleChecked(checklist)">
                             <el-checkbox :label="status" v-for="status in cities" :key="status">{{status}}</el-checkbox>
                         </el-checkbox-group>
-
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">确定</el-button>
@@ -117,9 +116,9 @@
                         this.$message.error(res.msg || '加载错误');
                     }
                 }).then(()=>{
-                    ajax.roleGet().then(res=>{
+                    ajax.getName().then(res=>{
                         if(res.code==0){
-                            this.cities=res.rolelist
+                            this.cities=res.users
                         }
                     })
                 })

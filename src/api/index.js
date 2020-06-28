@@ -315,6 +315,14 @@ const getName=(query)=>{
         data: query
     });
 }
+//rolegroup/get
+const getGroup=(query)=>{
+    return request({
+        url: '/rolegroup/get',
+        method: 'post',
+        data: query
+    });
+}
 const ajax={
     Info:Info,
     bugState:bugState,
@@ -355,6 +363,7 @@ const ajax={
     userGroup:userGroup,
     userUpdate:userUpdate,
     userAdd:userAdd,
-    getName:getName
+    getName:getName,
+    getGroup:getGroup
 }
 export default ajax;

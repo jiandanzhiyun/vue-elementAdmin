@@ -66,6 +66,19 @@
           "title": "用户组"
         }
       ]
+    },
+    {
+      "icon": "el-icon-s-custom",
+      "index": "usermanage",
+      "title": "用户管理",
+      "subs": [
+        {
+          "icon": "el-icon-plus",
+          "index": "adduser",
+          "title": "添加用户"
+        }
+        
+      ]
     }
   ]
 }
